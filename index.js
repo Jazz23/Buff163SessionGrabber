@@ -17,12 +17,15 @@ async function tryGetSessionCookie(page) {
 async function main() {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
+  // get username/pass from commandline args
+  const username = process.argv[2];
+  const password = process.argv[3];
   await page.goto('https://store.steampowered.com/login/?redir=&redir_ssl=1&snr=1_4_4__global-header');
   // wait for page to load
   await page.waitForSelector('#responsive_page_template_content > div > div:nth-child(1) > div > div > div > div.newlogindialog_FormContainer_3jLIH > div > form > div:nth-child(1) > input');
   // type in username
-  await page.type('#responsive_page_template_content > div > div:nth-child(1) > div > div > div > div.newlogindialog_FormContainer_3jLIH > div > form > div:nth-child(1) > input', 'buffscraper01');
-  await page.type('#responsive_page_template_content > div > div:nth-child(1) > div > div > div > div.newlogindialog_FormContainer_3jLIH > div > form > div:nth-child(2) > input', 'Ripple123');
+  await page.type('#responsive_page_template_content > div > div:nth-child(1) > div > div > div > div.newlogindialog_FormContainer_3jLIH > div > form > div:nth-child(1) > input', username);
+  await page.type('#responsive_page_template_content > div > div:nth-child(1) > div > div > div > div.newlogindialog_FormContainer_3jLIH > div > form > div:nth-child(2) > input', password);
   await page.click('#responsive_page_template_content > div > div:nth-child(1) > div > div > div > div.newlogindialog_FormContainer_3jLIH > div > form > div.newlogindialog_SignInButtonContainer_14fsn > button');
   await page.waitForSelector('#account_pulldown');
 
