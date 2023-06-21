@@ -15,7 +15,7 @@ async function tryGetSessionCookie(page) {
 }
 
 async function main() {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({headless: "new"});
   const page = await browser.newPage();
   // get username/pass from commandline args
   const username = process.argv[2];
